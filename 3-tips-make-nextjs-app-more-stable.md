@@ -1,5 +1,7 @@
 # 3 Tips to Make Your Next.js App More Stable
 
+![3 Tips to Make Your Next.js App More Stable Banner](3-tips-banner.jpg)
+
 Since Next.js introduced the `App Router` feature, it provides `React Server Components` (`RSC`).
 
 `RSC` allows your app to render on the server-side, returning static HTML to the browser for faster initial load times.
@@ -23,7 +25,7 @@ The concern here is: what happens if the API fetch encounters an error? This cou
 
 ![error](error.png)
 
-The example code uses Express.js to simulate an API:
+The example code using Express.js to simulate an API:
 
 ```ts
 import express from 'express';

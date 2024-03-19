@@ -66,7 +66,7 @@ So what can be improved here? We can:
 
 You can write addons for fetch, or use axios with axios plugins to do this;
 
-Here I use a lib called [`xior`](<[https](https://www.npmjs.com/package/xior)>) to do these improvements, the `xior` lib's API similar to `axios` and use built-in `fetch`:
+Here I use a lib called [`xior`](https://www.npmjs.com/package/xior) to do these improvements, the `xior` lib's API similar to `axios` and use built-in `fetch`:
 
 Install xior first:
 

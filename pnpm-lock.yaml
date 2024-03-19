@@ -57,8 +57,8 @@ importers:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
       xior:
-        specifier: ^0.2.3
-        version: 0.2.3
+        specifier: ^0.2.4
+        version: 0.2.4
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -3759,8 +3759,8 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
-  /xior@0.2.3:
-    resolution: {integrity: sha512-W0c+XCyvgHpeUgPHFznfUCXFmJ3C1eGioMUKgwqG1zLnFRMyJWq+n2vcVfj6wbsu2oDnWhNt9gSad3IYje9UzQ==}
+  /xior@0.2.4:
+    resolution: {integrity: sha512-AhqLlqBk28Y2lT2y8W+0imm5SEyvneIlNIFlE+bYzf6B162g2sNRgkSsDN3xgMTa53uAMTiYLvGWWBmeTdyLCg==}
     dependencies:
       tiny-lru: 11.2.5
       ts-deepmerge: 7.0.0

@@ -1,10 +1,10 @@
-# 3 Tips make Next.js App More Stable
+# 3 Tips to Make Your Next.js App More Stable
 
-Since Next.js add `App Router` feature, we have `React Server Component`(`RSC`).
+Since Next.js introduced the `App Router` feature, it provides `React Server Components` (`RSC`).
 
-`RSC` can make your app rendering on server side, then return static HTML to browser.
+`RSC` allows your app to render on the server-side, returning static HTML to the browser for faster initial load times.
 
-Here is an example: **We write a page to render data that fetched from API**:
+Here's an example: **Creating a page to render data from an API**
 
 ```ts
 // app/page.tsx
@@ -17,13 +17,13 @@ export default async function HelloPage() {
 }
 ```
 
-> Note: Add `{cache: 'no-cache'}` to disable cache for our testing purpose
+> **Note**: `{cache: 'no-cache'}` is added to disable caching for testing purposes.
 
-The idea here is: What if the API error, and we will get an crashed page:
+The concern here is: what happens if the API fetch encounters an error? This could lead to a crashed page.
 
 ![error](error.png)
 
-The API example code with express.js:
+The example code uses Express.js to simulate an API:
 
 ```ts
 import express from 'express';
@@ -56,19 +56,17 @@ app.listen(3068, () => {
 });
 ```
 
-So what can be improved here? We can:
+Here's how we can improve this scenario:
 
-1. At least to retry if API have error;
+1. **Implement Error Retries:** If the API call fails, we can retry the request a few times before giving up.
+2. **Cache Data:** When the API request is successful, cache the data. If retries still fail, use the cached data to prevent a completely broken page.
+3. **Dedupe Requests:** Avoid making unnecessary redundant requests. This prevents multiple identical requests from being sent simultaneously on the fly.
 
-2. Cache data when API request success, and use the cached data if API retried but still error;
+These functionalities can be achieved using libraries like `axios` with its third-party plugins or a library specifically designed for these purposes, such as [`xior`](https://npmjs.org/xior).
 
-3. Another additional: Dedupe the requests;
+In this case, we'll use [`xior`](https://npmjs.org/xior). **xior** offers a similar API to `axios` and leverages the built-in `fetch` API.
 
-You can write addons for fetch, or use axios with axios plugins to do this;
-
-Here I use a lib called [`xior`](https://www.npmjs.com/package/xior) to do these improvements, the `xior` lib's API similar to `axios` and use built-in `fetch`:
-
-Install xior first:
+**Install `xior`**:
 
 ```sh
 npm install xior
@@ -77,7 +75,7 @@ npm install xior
 pnpm install xior
 ```
 
-Create instance and use the plugins:
+Create an `app/http.ts` file to configure **xior** with its built-in plugins:
 
 ```ts
 // app/http.ts
@@ -105,7 +103,7 @@ http.plugins.use(errorCachePlugin());
 http.plugins.use(dedupeRequestPlugin());
 ```
 
-And we create another page `app/improved/page.tsx` to use the code:
+Create a new page `app/improved/page.tsx` that utilizes the `http.ts` instance:
 
 ```tsx
 // app/improved/page.tsx
@@ -130,8 +128,8 @@ export default async function ImprovedHelloPage() {
 }
 ```
 
-So when have error happend and even retried still error, but the page will not crash:
+Even if the API call fails and retries are unsuccessful, the page won't crash. Instead, you can show an error message and possibly display cached data or a fallback message. This ensures a better user experience and avoids showing a broken page.
 
 ![xior plugins](ok.png)
 
-Example source code: https://github.com/suhaotian/3-tips-make-next-more-stable-demo
+Thank you for reading these little tips. Here's the **Example Source Code**: https://github.com/suhaotian/3-tips-make-next-more-stable-demo

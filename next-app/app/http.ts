@@ -19,4 +19,7 @@ http.plugins.use(
   })
 );
 http.plugins.use(errorCachePlugin());
-http.plugins.use(dedupeRequestPlugin());
+if (typeof window !== 'undefined') {
+  // fetch in Next.js server components, the requests already dedupe
+  http.plugins.use(dedupeRequestPlugin());
+}

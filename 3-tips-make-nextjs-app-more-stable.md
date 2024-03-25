@@ -1,6 +1,6 @@
 # 3 Tips to Make Your Next.js App More Stable
 
-![3 Tips to Make Your Next.js App More Stable Banner](3-tips-banner.jpg)
+![3 Tips to Make Your Next.js App More Stable Banner](./3-tips-banner.jpg)
 
 Since Next.js introduced the `App Router` feature, it provides `React Server Components` (`RSC`).
 
@@ -102,7 +102,10 @@ http.plugins.use(
   })
 );
 http.plugins.use(errorCachePlugin());
-http.plugins.use(dedupeRequestPlugin());
+if (typeof window !== 'undefined') {
+  // fetch in Next.js server components, the requests already dedupe
+  http.plugins.use(dedupeRequestPlugin());
+}
 ```
 
 Create a new page `app/improved/page.tsx` that utilizes the `http.ts` instance:
